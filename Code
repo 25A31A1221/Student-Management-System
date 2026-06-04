@@ -1,0 +1,88 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Student {
+public:
+    int rollNo;
+    string name;
+    float marks;
+
+    Student(int r, string n, float m) {
+        rollNo = r;
+        name = n;
+        marks = m;
+    }
+};
+
+class StudentManagementSystem {
+private:
+    vector<Student> students;
+
+public:
+    void addStudent() {
+        int roll;
+        string name;
+        float marks;
+
+        cout << "Enter Roll Number: ";
+        cin >> roll;
+        cin.ignore();
+
+        cout << "Enter Name: ";
+        getline(cin, name);
+
+        cout << "Enter Marks: ";
+        cin >> marks;
+
+        students.push_back(Student(roll, name, marks));
+        cout << "Student Added Successfully!\n";
+    }
+
+    void displayStudents() {
+        if (students.empty()) {
+            cout << "No Records Found!\n";
+            return;
+        }
+
+        cout << "\nStudent Records\n";
+        cout << "-----------------------------\n";
+
+        for (auto &s : students) {
+            cout << "Roll No: " << s.rollNo << endl;
+            cout << "Name    : " << s.name << endl;
+            cout << "Marks   : " << s.marks << endl;
+            cout << "-----------------------------\n";
+        }
+    }
+
+    void searchStudent() {
+        int roll;
+        cout << "Enter Roll Number to Search: ";
+        cin >> roll;
+
+        for (auto &s : students) {
+            if (s.rollNo == roll) {
+                cout << "\nStudent Found\n";
+                cout << "Roll No: " << s.rollNo << endl;
+                cout << "Name   : " << s.name << endl;
+                cout << "Marks  : " << s.marks << endl;
+                return;
+            }
+        }
+
+        cout << "Student Not Found!\n";
+    }
+
+    void updateStudent() {
+        int roll;
+        cout << "Enter Roll Number to Update: ";
+        cin >> roll;
+        cin.ignore();
+
+        for (auto &s : students) {
+            if (s.rollNo == roll) {
+                cout << "Enter New Name: ";
+                getline(cin, s.name);
+
+                cout << "Enter New Marks: ";
